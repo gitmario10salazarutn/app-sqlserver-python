@@ -5,23 +5,26 @@ Created on Fri Mar  3 15:53:32 2023
 @author: Mario
 """
 
-import pyodbc as conn
+import pymssql as conn
 from decouple import config
 
 
 def connect_postgresql(hostname, dbname, username, password):
     try:
-        conn_post = conn.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER=' +
-                                hostname + ';DATABASE=' + dbname + ';UID=' + username + ';PWD=' + password)
+        conn_post = conn.connect(
+            server=hostname, user=username, password=password, database=dbname)
         return conn_post
     except Exception as e:
         print("Ocurrió un error al conectar a PostgreSQL: ", e)
         raise Exception(e)
 
+
 def connect_sqlserver(hostname, dbname, username, password):
     try:
-        conexion = conn.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER=' +
-                                hostname + ';DATABASE=' + dbname + ';UID=' + username + ';PWD=' + password)
+        # conexion = conn.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER=' +
+        #                        hostname + ';DATABASE=' + dbname + ';UID=' + username + ';PWD=' + password)
+        conexion = conn.connect(
+            server=hostname, user=username, password=password, database=dbname)
         cursor = conexion.cursor()
         print("Database connect successfully to SQL Server")
         return cursor
@@ -30,7 +33,9 @@ def connect_sqlserver(hostname, dbname, username, password):
         print("Ocurrió un error al conectar a SQL Server: ", e)
 
 
-#print(connect_sqlserver("sql.bsite.net\MSSQL2016", "mario10salazar_utn", "mario10salazar_utn", "2202113610Mario10"))
+print(connect_sqlserver("sql.bsite.net\MSSQL2016",
+      "mario10salazar_utn", "mario10salazar_utn", "2202113610Mario10"))
+
 
 def get_connection():
     try:
@@ -43,3 +48,6 @@ def get_connection():
         return connection
     except Exception as ex:
         raise Exception(ex)
+
+
+print(get_connection())
