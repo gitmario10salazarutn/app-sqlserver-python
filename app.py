@@ -480,7 +480,7 @@ def update_user(id):
             return jsonify({'message': 'User with email exist on database!', 'token': None})
         else:
             return jsonify({
-                'message': 'User created successfully!',
+                'message': 'User was updated successfully!',
                 'token': user
             })
     except Exception as ex:
