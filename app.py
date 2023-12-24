@@ -7,13 +7,15 @@ Created on Fri Mar  3 15:56:16 2023
 
 from flask import Flask, jsonify, render_template, request
 from flask_login import login_required, login_user, LoginManager, logout_user
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 from models import models as model
 import jwt
 import json
 
 app = Flask(__name__)
-CORS(app)
+#CORS(app)
+CORS(app, resources={r"/users/*": {"origins": "*"}})
+
 login_manager = LoginManager(app)
 
 
@@ -30,6 +32,7 @@ def Page_Not_Found(error):
 
 
 @app.route('/users/delete_user/<id>', methods=['DELETE'])
+@cross_origin()
 def delete_user(id):
     try:
         data = request.json
@@ -54,6 +57,7 @@ def delete_user(id):
 
 
 @app.route('/users/delete_language/<id>', methods=['DELETE'])
+@cross_origin()
 def delete_language(id):
     try:
         row_affect = model.Model.delete_language(id=id)
@@ -72,6 +76,7 @@ def delete_language(id):
 
 
 @app.route('/users/setenable_user/<id>', methods=['POST'])
+@cross_origin()
 def setenable_user(id):
     try:
         row_affect = model.Model.setenable_user(id=id)
@@ -90,6 +95,7 @@ def setenable_user(id):
 
 
 @app.route('/users/get_users', methods=['GET'])
+@cross_origin()
 def get_users():
     try:
         users = model.Model.get_users()
@@ -102,6 +108,7 @@ def get_users():
 
 
 @app.route('/users/get_languages', methods=['GET'])
+@cross_origin()
 def get_languages():
     try:
         languages = model.Model.get_languages()
@@ -114,6 +121,7 @@ def get_languages():
 
 
 @app.route('/users/get_languagebyuser/<username>', methods=['GET'])
+@cross_origin()
 def get_languagebyuser(username):
     try:
         language = model.Model.get_languagesbyuser(username=username)
@@ -132,6 +140,7 @@ def get_languagebyuser(username):
 
 
 @app.route('/users/get_educationbyid/<id>', methods=['GET'])
+@cross_origin()
 def get_educationbyid(id):
     try:
         eduaction = model.Model.get_educationbyid(id=id)
@@ -150,6 +159,7 @@ def get_educationbyid(id):
 
 
 @app.route('/users/get_educationbyuser/<id>', methods=['GET'])
+@cross_origin()
 def get_educationbyuser(id):
     try:
         eduaction = model.Model.get_educationbyuser(username=id)
@@ -168,6 +178,7 @@ def get_educationbyuser(id):
 
 
 @app.route('/users/create_education', methods=['POST'])
+@cross_origin()
 def create_education():
     try:
         data = request.json
@@ -184,6 +195,7 @@ def create_education():
 
 
 @app.route('/users/update_education/<id>', methods=['PUT'])
+@cross_origin()
 def update_education(id):
     try:
         data = request.json
@@ -203,6 +215,7 @@ def update_education(id):
 
 
 @app.route('/users/delete_education/<id>', methods=['DELETE'])
+@cross_origin()
 def delete_education(id):
     try:
         row_affect = model.Model.delete_education(id=id)
@@ -221,6 +234,7 @@ def delete_education(id):
 
 
 @app.route('/users/get_genders', methods=['GET'])
+@cross_origin()
 def get_genders():
     try:
         genders = model.Model.get_genders()
@@ -233,6 +247,7 @@ def get_genders():
 
 
 @app.route('/users/get_languagebyid/<id>', methods=['GET'])
+@cross_origin()
 def get_languagebyid(id):
     try:
         language = model.Model.get_languagebyid(id=id)
@@ -251,6 +266,7 @@ def get_languagebyid(id):
 
 
 @app.route('/users/create_language', methods=['POST'])
+@cross_origin()
 def create_language():
     try:
         data = request.json
@@ -272,6 +288,7 @@ def create_language():
 
 
 @app.route('/users/update_languagelearn/<id>', methods=['POST'])
+@cross_origin()
 def update_languagelearn(id):
     try:
         data = request.json
@@ -291,6 +308,7 @@ def update_languagelearn(id):
 
 
 @app.route('/users/get_knowledgelevels', methods=['GET'])
+@cross_origin()
 def get_knowledgelevels():
     try:
         kl = model.Model.get_knowledgwlevels()
@@ -303,6 +321,7 @@ def get_knowledgelevels():
 
 
 @app.route('/users/get_LanguagesProgramming', methods=['GET'])
+@cross_origin()
 def get_LanguagesProgramming():
     try:
         kl = model.Model.get_LanguagesProgramming()
@@ -315,6 +334,7 @@ def get_LanguagesProgramming():
 
 
 @app.route('/users/get_rols', methods=['GET'])
+@cross_origin()
 def get_rols():
     try:
         rols = model.Model.get_rols()
@@ -327,6 +347,7 @@ def get_rols():
 
 
 @app.route('/users/get_userbyusername/<username>', methods=['GET'])
+@cross_origin()
 def get_userbyusername(username):
     try:
         user = model.Model.get_userbyusername(username=username)
@@ -345,6 +366,7 @@ def get_userbyusername(username):
 
 
 @app.route('/users/get_userbyemail/<email>', methods=['GET'])
+@cross_origin()
 @login_required
 def get_userbyemail(email):
     try:
@@ -364,6 +386,7 @@ def get_userbyemail(email):
 
 
 @app.route('/users/login_user', methods=['GET', 'POST'])
+@cross_origin()
 def login_user():
     try:
         data = request.json
@@ -390,6 +413,7 @@ def login_user():
 
 
 @app.route('/users/change_password/<id>', methods=['PUT'])
+@cross_origin()
 def change_password(id):
     try:
         data = request.json
@@ -418,6 +442,7 @@ def change_password(id):
 
 
 @app.route('/users/create_user', methods=['POST'])
+@cross_origin()
 def create_user():
     try:
         data = request.json
@@ -438,7 +463,8 @@ def create_user():
         return jsonify({'message': 'Error {0}'.format(ex)}), 500
 
 
-@app.route('/users/update_user/<id>', methods=['POST'])
+@app.route('/users/update_user/<id>', methods=['PUT'])
+@cross_origin()
 def update_user(id):
     try:
         data = request.json
@@ -470,11 +496,3 @@ if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0")
 else:
     application = app
-    """
-    Buenos días
-El martes fui para ver si podía ayudarme a matricularme en octavo nivel, ya que no me permite tomar materias y quería saber si ya puedo elegir, de ser así para que por favor me ayude para poder imprimir el formulario e ir a cancelar una materia de segunda matricula que tengo o necesariamente tengo que presentarme en la universidad para realizar el trámite.
-Por su ayuda, muchas gracias
-Att: Mario Salazar
-
-
-    """
