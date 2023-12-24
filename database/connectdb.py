@@ -5,7 +5,7 @@ Created on Fri Mar  3 15:53:32 2023
 @author: Mario
 """
 
-import pymssql as conn
+import pyodbc
 import psycopg2 as conn2
 from decouple import config
 
@@ -26,25 +26,31 @@ def connect_postgresql(hostname, dbname, username, password):
 
 def connect_sqlserver(hostname, dbname, username, password):
     try:
-        # conexion = conn.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER=' +
-        #                        hostname + ';DATABASE=' + dbname + ';UID=' + username + ';PWD=' + password)
-        conexion = conn.connect(
-            server=hostname, user=username, password=password, database=dbname)
-        cursor = conexion.cursor()
+        connectionString = f'DRIVER={{SQL Server}};SERVER={hostname};DATABASE={dbname};UID={username};PWD={password}'
+        conn = pyodbc.connect(connectionString)
+        cursor = conn.cursor()
         print("Database connect successfully to SQL Server")
-        return cursor
+        cursor.execute('select*from users;')
+        # Obtener los resultados
+        rows = cursor.fetchall()
+        # Imprimir los resultados
+        for row in rows:
+                #lista_users.append(row)
+            print(row)
+        return conn
     except Exception as e:
         # Atrapar error
         print("Ocurrió un error al conectar a SQL Server: ", e)
 
+print("Mario Salazar")
+print(connect_sqlserver("DESKTOP-50R1G4H\SQLEXPRESS2019",
+      "db_marioutn", "sa", "password-sql2019"))
 
-#print(connect_sqlserver("sql.bsite.net\MSSQL2016",
-#      "mario10salazar_utn", "mario10salazar_utn", "2202113610Mario10"))
-
+print("Mario Salazar")
 
 def get_connection():
     try:
-        connection = connect_postgresql(
+        connection = connect_sqlserver(
             config('HOST_NAME'),
             config('DATABASE'),
             config('USER_NAME'),

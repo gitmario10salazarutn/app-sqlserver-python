@@ -24,7 +24,7 @@ class Entity:
                         "last_name": user[5],
                         "phone": user[6],
                         "address": user[7],
-                        "date_born": user[9].strftime('%d/%m/%Y')
+                        "date_born": user[9]
                     },
                     "id_user": user[10],
                     "user_name": user[11],
@@ -32,7 +32,7 @@ class Entity:
                     "password": user[13],
                     "login_code": user[14],
                     "user_state": user[15],
-                    "register_date": user[16].strftime('%d/%m/%Y'),
+                    "register_date": user[16],
                     "rol_user": {
                         "id_rol": user[20],
                         "rol_name": user[21]
