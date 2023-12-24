@@ -34,6 +34,13 @@ class Model:
             raise Exception(ex)
 
     @classmethod
+    def changeState(self, state):
+        if (state==0):
+            return 1
+        else:
+            return 0
+    
+    @classmethod
     def setenable_user(self, id):
         try:
             connection = conn.get_connection()
@@ -42,7 +49,7 @@ class Model:
                 if user:
                     user_state = user.get('user')['user_state']
                     cursor.execute(
-                        "update users set user_state = '{0}' where user_name = '{1}'".format(not user_state, id))
+                        "update users set user_state = '{0}' where user_name = '{1}'".format(self.changeState(user_state), id))
                     row_affects = cursor.rowcount
                     connection.commit()
                     if row_affects > 0:
