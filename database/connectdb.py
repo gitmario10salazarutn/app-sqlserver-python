@@ -26,7 +26,8 @@ def connect_postgresql(hostname, dbname, username, password):
 
 def connect_sqlserver(hostname, dbname, username, password):
     try:
-        connectionString = f'DRIVER={{SQL Server}};SERVER={hostname};DATABASE={dbname};UID={username};PWD={password}'
+        #connectionString = f'DRIVER={{SQL 17 Server}};SERVER={hostname};DATABASE={dbname};UID={username};PWD={password}'
+        connectionString = f'DRIVER={{ODBC Driver 17 for SQL Server}};SERVER={hostname};DATABASE={dbname};UID={username};PWD={password}'
         conn = pyodbc.connect(connectionString)
         cursor = conn.cursor()
         print("Database connect successfully to SQL Server")
@@ -43,8 +44,7 @@ def connect_sqlserver(hostname, dbname, username, password):
         print("Ocurrió un error al conectar a SQL Server: ", e)
 
 print("Mario Salazar", config('HOST_NAME'))
-print(connect_sqlserver("DESKTOP-50R1G4H\SQLEXPRESS2019",
-      "db_marioutn", "sa", "password-sql2019"))
+
 
 print("Mario Salazar", config('HOST_NAME'))
 
