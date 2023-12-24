@@ -30,23 +30,12 @@ def connect_sqlserver(hostname, dbname, username, password):
         connectionString = f'DRIVER={{ODBC Driver 17 for SQL Server}};SERVER={hostname};DATABASE={dbname};UID={username};PWD={password}'
         conn = pyodbc.connect(connectionString)
         cursor = conn.cursor()
-        print("Database connect successfully to SQL Server")
-        cursor.execute('select*from users;')
-        # Obtener los resultados
-        rows = cursor.fetchall()
-        # Imprimir los resultados
-        for row in rows:
-                #lista_users.append(row)
-            print(row)
+        #print("Database connect successfully to SQL Server")
         return conn
     except Exception as e:
         # Atrapar error
         print("Ocurrió un error al conectar a SQL Server: ", e)
 
-print("Mario Salazar", config('HOST_NAME'))
-
-
-print("Mario Salazar", config('HOST_NAME'))
 
 def get_connection():
     try:
@@ -60,5 +49,3 @@ def get_connection():
     except Exception as ex:
         raise Exception(ex)
 
-
-print(get_connection())

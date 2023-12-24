@@ -23,7 +23,7 @@ login_manager = LoginManager(app)
 
 @login_manager.user_loader
 def load_user(id):
-    print(id)
+    #print(id)
     user = model.Model.get_userbyusername(
         username=id) or model.Model.get_userbyemail(email=id)
     return user
@@ -471,7 +471,7 @@ def update_user(id):
     try:
         data = request.json
         user = model.Model.update_user(data=data, id_user=id)
-        print(user)
+        #print(user)
         if user is None:
             return jsonify({'message': 'Data not found!', 'token': None}), 404
         elif user == -1:
