@@ -42,11 +42,11 @@ def connect_sqlserver(hostname, dbname, username, password):
         # Atrapar error
         print("Ocurrió un error al conectar a SQL Server: ", e)
 
-print("Mario Salazar")
+print("Mario Salazar", config('HOST_NAME'))
 print(connect_sqlserver("DESKTOP-50R1G4H\SQLEXPRESS2019",
       "db_marioutn", "sa", "password-sql2019"))
 
-print("Mario Salazar")
+print("Mario Salazar", config('HOST_NAME'))
 
 def get_connection():
     try:
