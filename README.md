@@ -6,12 +6,12 @@
       <img
         src="https://i.postimg.cc/nL7WvjGW/python-original.png"
         alt="Image 1"
-        style="width: 70px; height: auto; margin: 5px"
+        style="width: 70px; height: 70px; margin: 5px"
       />
       <img
         src="https://i.postimg.cc/kXD1mCLL/sql-server.png"
         alt="Image 3"
-        style="max-width: 70px; height: auto; margin: 5px"
+        style="width: 70px; height: 70px; margin: 5px"
       />
     </div>
 
