@@ -1,4 +1,21 @@
-# app-sqlserver-python
+# Hi, I'm Mario Salazar👋
+
+# <p align="center">API SQL Server - Python</p>
+
+   <div style="display: flex; flex-wrap: wrap; justify-content: center">
+      <img
+        src="https://i.postimg.cc/nL7WvjGW/python-original.png"
+        alt="Image 1"
+        style="width: 70px; height: auto; margin: 5px"
+      />
+      <img
+        src="https://i.postimg.cc/kXD1mCLL/sql-server.png"
+        alt="Image 3"
+        style="max-width: 70px; height: auto; margin: 5px"
+      />
+    </div>
+
+Your description here
 
 # Introduction
 
@@ -6,14 +23,16 @@
 - Write a short introduction to the project.
 - If you are using badges, add them here.
 
-## 📒ledger: Index
+## 📒 Index
 
-- [app-sqlserver-python](#app-sqlserver-python)
+- [Hi, I'm Mario Salazar👋](#hi-im-mario-salazar)
+- [API SQL Server - Python](#api-sql-server---python)
 - [Introduction](#introduction)
-  - [📒ledger: Index](#ledger-index)
+  - [📒 Index](#-index)
   - [🔰 About](#-about)
   - [⚡ Usage](#-usage)
-    - [🔌 Installation](#-installation)
+    - [🔑 Environment Variables](#-environment-variables)
+  - [🛠️ Installation and Settings Project](#️-installation-and-settings-project)
     - [📦 Commands](#-commands)
     - [🔧 Development](#-development)
     - [🔩 Pre-Requisites](#-pre-requisites)
@@ -28,8 +47,15 @@
   - [❓ FAQ](#-faq)
     - [📄 Resources](#-resources)
     - [📷 Gallery](#-gallery)
-  - [🌟 Credit/Acknowledgment](#--creditacknowledgment)
+  - [🌟 Credit/Acknowledgment](#-creditacknowledgment)
   - [🔒 License](#-license)
+  - [➤ API Binary System Reference Go to API](#-api-binary-system-reference-go-to-api)
+    - [Get Binary Systems Conversions: Convert to: binary, octal and hexadecimal.](#get-binary-systems-conversions-convert-to-binary-octal-and-hexadecimal)
+    - [Get Binary Systems Conversions: Convert to: decimal, octal and hexadecimal.](#get-binary-systems-conversions-convert-to-decimal-octal-and-hexadecimal)
+    - [Get Binary Systems Conversions: Convert to: binary, decimal and hexadecimal.](#get-binary-systems-conversions-convert-to-binary-decimal-and-hexadecimal)
+    - [Get Binary Systems Conversions: Convert to: binary, octal and decimal.](#get-binary-systems-conversions-convert-to-binary-octal-and-decimal)
+  - [Minhas Skills](#minhas-skills)
+  - [Onde me encontrar](#onde-me-encontrar)
 
 ## 🔰 About
 
@@ -39,10 +65,79 @@ Add a detailed introduction about the project here, everything you want the read
 
 Write about how to use this project.
 
-### 🔌 Installation
+<!-- Env Variables -->
+
+### 🔑 Environment Variables
+
+To run this project, you will need to add the following environment variables to your `.env` file
+
+`API_KEY`
+
+`HOST_NAMESQL`
+
+`DATABASESQL`
+
+`USER_NAMESQL`
+
+`PASSWORDSQL`
+
+`PORT`
+
+## 🛠️ Installation and Settings Project
 
 - Steps on how to install this project, to use it.
 - Be very detailed here, For example, if you have tools which run on different operating systems, write installation steps for all of them.
+
+<div style="display: flex; align-items: center; padding: 5px">
+      <img
+        src="https://i.postimg.cc/j5gYm5Sn/Windows.png"
+        alt="Java Logo"
+        style="margin-right: 10px; width: 20px; height: 20px"
+      />
+      <span style="font-weight: bold">Windows</span>
+    </div>
+
+1. Clone the repository
+
+```bash
+$ git clone https://github.com/gitmario10salazarutn/app-sqlserver-python.git
+```
+
+2.  Open project with Visual Studio Code
+
+```bash
+$ cd app-sqlserver-python
+$ code .
+```
+
+3. Create the virtual enviroment and activate
+
+```bash
+$ pip install virtualenv
+$ virtualenv name_env
+$ .\name_env\Scripts\activate
+```
+
+4. Install the requirements.txt file
+
+```bash
+$ pip install -r requirements.txt
+```
+
+5. 🏃 Run API or Start Server
+
+```
+$ py .\api\app.py
+```
+
+<div style="display: flex; align-items: center; padding: 5px">
+      <img
+        src="https://i.postimg.cc/Qtxrf5hr/Linux.png"
+        alt="Java Logo"
+        style="margin-right: 10px; width: 20px; height: 20px"
+      />
+      <span style="font-weight: bold">Linux</span>
+    </div>
 
 ```
 $ add installations steps if you have to.
@@ -173,3 +268,334 @@ Credit the authors here.
 ## 🔒 License
 
 Add a license here, or a link to it.
+
+---
+
+## ➤ API Binary System Reference [Go to API](https://app-sqlserver-python.vercel.app/api/docs)
+
+#### Get Binary Systems Conversions: Convert to: binary, octal and hexadecimal.
+
+```http
+GET /decimal/:decimal
+```
+
+| Parameter | Type     | Description                  |
+| :-------- | :------- | :--------------------------- |
+| `decimal` | `string` | **Required**. Decimal number |
+
+#### Get Binary Systems Conversions: Convert to: decimal, octal and hexadecimal.
+
+```http
+GET /binary/:binary
+```
+
+| Parameter | Type     | Description                 |
+| :-------- | :------- | :-------------------------- |
+| `binary`  | `string` | **Required**. Binary number |
+
+#### Get Binary Systems Conversions: Convert to: binary, decimal and hexadecimal.
+
+```http
+GET /octal/:octal
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `octal`   | `string` | **Required**. Octal number |
+
+#### Get Binary Systems Conversions: Convert to: binary, octal and decimal.
+
+```http
+GET /hexadecimal/:hexadecimal
+```
+
+| Parameter     | Type     | Description                      |
+| :------------ | :------- | :------------------------------- |
+| `hexadecimal` | `string` | **Required**. Hexadecimal number |
+
+---
+
+## Minhas Skills
+
+**Aplicações e dados**
+
+![C++](https://img.shields.io/badge/-C++-333333?style=flat&logo=C%2B%2B&logoColor=00599C)
+
+![Java](https://img.shields.io/badge/-Java-333333?style=flat&logo=Java&logoColor=007396)
+
+![JavaScript](https://img.shields.io/badge/-JavaScript-333333?style=flat&logo=javascript)
+
+![HTML5](https://img.shields.io/badge/-HTML5-333333?style=flat&logo=HTML5)
+
+![CSS](https://img.shields.io/badge/-CSS-333333?style=flat&logo=CSS3&logoColor=1572B6)
+
+![React](https://img.shields.io/badge/-React-333333?style=flat&logo=react)
+
+![MySQL](https://img.shields.io/badge/-MySQL-333333?style=flat&logo=mysql)
+
+**Utilidades**
+
+![Insomnia](https://img.shields.io/badge/-Insomnia-333333?style=flat&logo=insomnia)
+
+![Postman](https://img.shields.io/badge/-Postman-333333?style=flat&logo=postman)
+
+**DevOps**
+
+![Git](https://img.shields.io/badge/-Git-333333?style=flat&logo=git)
+
+![GitHub](https://img.shields.io/badge/-GitHub-333333?style=flat&logo=github)
+
+**Ferramentas de desenvolvimento**
+
+![Visual Studio Code](https://img.shields.io/badge/-Visual%20Studio%20Code-333333?style=flat&logo=visual-studio-code&logoColor=007ACC)
+
+![Eclipse](https://img.shields.io/badge/-Eclipse-333333?style=flat&logo=eclipse-ide&logoColor=2C2255)
+
+![Figma](https://img.shields.io/badge/-Figma-333333?style=flat&logo=figma&logoColor=007ACC)
+
+## Onde me encontrar
+
+<div
+      style="
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 5px;
+        align-items: center;
+      "
+    >
+      <a
+        href="#"
+        title="mariosalazar.ms.10@gmail.com"
+        style="
+          background: darkslategray;
+          width: auto;
+          color: gainsboro;
+          text-decoration: none;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 3px;
+          border-radius: 3px;
+          margin: 5px;
+        "
+      >
+        <img
+          style="
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+            border-radius: 50%;
+            background: white;
+          "
+          src="https://i.postimg.cc/pXSwMrMK/gmail.png"
+          alt="Gmail"
+        />
+        Gmail
+      </a>
+      <a
+        href="#"
+        title="@gitmariosalazar"
+        style="
+          background: darkslategray;
+          max-width: auto;
+          color: gainsboro;
+          text-decoration: none;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 3px;
+          border-radius: 3px;
+          margin: 5px;
+        "
+      >
+        <img
+          style="
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+            border-radius: 50%;
+            background: white;
+          "
+          src="https://i.postimg.cc/fLZ4qPnF/github.png"
+          alt="Gmail"
+        />
+        Git Hub
+      </a>
+      <a
+        href="#"
+        title="Instagram"
+        style="
+          background: darkslategray;
+          max-width: auto;
+          color: gainsboro;
+          text-decoration: none;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 3px;
+          border-radius: 3px;
+          margin: 5px;
+        "
+      >
+        <img
+          style="
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+            border-radius: 50%;
+            background: white;
+          "
+          src="https://i.postimg.cc/mZmxVVdX/instagram.png"
+          alt="Instagram"
+        />
+        Instagram
+      </a>
+      <a
+        href="#"
+        title="Link In"
+        style="
+          background: darkslategray;
+          max-width: auto;
+          color: gainsboro;
+          text-decoration: none;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 3px;
+          border-radius: 3px;
+          margin: 5px;
+        "
+      >
+        <img
+          style="
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+            border-radius: 50%;
+            background: white;
+          "
+          src="https://i.postimg.cc/kXG0H8zn/linkin.png"
+          alt="Link In"
+        />
+        Link In
+      </a>
+      <a
+        href="#"
+        title="Telegram"
+        style="
+          background: darkslategray;
+          max-width: auto;
+          color: gainsboro;
+          text-decoration: none;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 3px;
+          border-radius: 3px;
+          margin: 5px;
+        "
+      >
+        <img
+          style="
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+            border-radius: 50%;
+            background: white;
+          "
+          src="https://i.postimg.cc/QC4Rtx9G/telegram.png"
+          alt="Gmail"
+        />
+        Telegram
+      </a>
+      <a
+        href="#"
+        title="WhatsApp"
+        style="
+          background: darkslategray;
+          max-width: auto;
+          color: gainsboro;
+          text-decoration: none;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 3px;
+          border-radius: 3px;
+          margin: 5px;
+        "
+      >
+        <img
+          style="
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+            border-radius: 50%;
+            background: white;
+          "
+          src="https://i.postimg.cc/3NJsYDwF/whatsapp.png"
+          alt="WhatsApp"
+        />
+        WhatsApp
+      </a>
+      <a
+        href="#"
+        title="You Tube"
+        style="
+          background: darkslategray;
+          max-width: auto;
+          color: gainsboro;
+          text-decoration: none;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 3px;
+          border-radius: 3px;
+          margin: 5px;
+        "
+      >
+        <img
+          style="
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+            border-radius: 50%;
+            background: white;
+          "
+          src="https://i.postimg.cc/nz1yy1nL/youtube.png"
+          alt="You Tube"
+        />
+        You Tube
+      </a>
+      <a
+        href="#"
+        title="+593994532438"
+        style="
+          background: darkslategray;
+          max-width: auto;
+          color: gainsboro;
+          text-decoration: none;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 3px;
+          border-radius: 3px;
+          margin: 5px;
+        "
+      >
+        <img
+          style="
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+            border-radius: 50%;
+            background: white;
+          "
+          src="https://i.postimg.cc/3rzwnKfb/phone.png"
+          alt="Phone Number"
+        />
+        Phone
+      </a>
+    </div>
+
+[![GitHub](https://img.shields.io/github/followers/iuricode?label=follow&style=social)](LINK-DO-SEU-GITHUB)
