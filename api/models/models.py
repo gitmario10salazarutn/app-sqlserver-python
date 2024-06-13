@@ -9,19 +9,22 @@ from .entities import entities as entity
 from database import connectdb as conn
 from werkzeug.security import generate_password_hash, check_password_hash
 import datetime
+import json
 
 
 class Model:
 
     @classmethod
-    def delete_user(self, id, data):
+    def delete_user(self, id, password):
         try:
             connection = conn.get_connection()
-            user = self.get_userbyusername(id)
-            if check_password_hash(user.get('user')['password'], data['password']):
+            user = self.get_userbyusername(id) or self.get_userbyemail(id) or self.get_userbyid(id)
+            if user is None:
+                return -2
+            if check_password_hash(user.get('user')['password'], password):
                 with connection.cursor() as cursor:
                     cursor.execute(
-                        "update users set user_delete = 1 where user_name = '{0}'".format(id))
+                        "update users set user_delete = 1 where user_name = '{0}'".format(user.get('user')['user_name']))
                     row_affects = cursor.rowcount
                     connection.commit()
                     if row_affects > 0:
@@ -46,6 +49,9 @@ class Model:
             connection = conn.get_connection()
             with connection.cursor() as cursor:
                 user = self.get_userbyusername(id)
+                print(user)
+                if(user is None):
+                    return -2
                 if user:
                     user_state = user.get('user')['user_state']
                     cursor.execute(
@@ -69,7 +75,8 @@ class Model:
             cursor.execute("select * from gender order by id_gender asc;")
             rows = cursor.fetchall()
             if rows:
-                return entity.Entity.genderList(rows)
+                data_tuples = [tuple(d.values()) for d in rows]
+                return entity.Entity.genderList(data_tuples)
             else:
                 return None
         except Exception as ex:
@@ -83,7 +90,8 @@ class Model:
             cursor.execute("select * from rol_user order by id_rol asc;")
             rows = cursor.fetchall()
             if rows:
-                return entity.Entity.rolList(rows)
+                data_tuples = [tuple(d.values()) for d in rows]
+                return entity.Entity.rolList(data_tuples)
             else:
                 return None
         except Exception as ex:
@@ -98,7 +106,8 @@ class Model:
                 "select * from knowledge_level kl order by kl.id_knowledge_level asc;")
             rows = cursor.fetchall()
             if rows:
-                return entity.Entity.knowledgeLevelList(rows)
+                data_tuples = [tuple(d.values()) for d in rows]
+                return entity.Entity.knowledgeLevelList(data_tuples)
             else:
                 return None
         except Exception as ex:
@@ -129,7 +138,8 @@ class Model:
                 "select * from language_programming lp inner join language_type lt on lp.language_type = lt.id_langtype;")
             rows = cursor.fetchall()
             if rows:
-                return entity.Entity.languageProgrammingList(rows)
+                data_tuples = [tuple(d.values()) for d in rows]
+                return entity.Entity.languageProgrammingList(data_tuples)
             else:
                 return None
         except Exception as ex:
@@ -139,12 +149,14 @@ class Model:
     def get_users(self):
         try:
             connection = conn.get_connection()
+            print(connection)
             cursor = connection.cursor()
             cursor.execute(
                 "select * from gender g inner join person p on p.gender = g.id_gender inner join users u on u.person = p.id_person inner join rol_user ru on ru.id_rol = u.rol_user where u.user_delete = 0 order by u.id_user desc;")
             rows = cursor.fetchall()
             if rows:
-                return entity.Entity.ListUsers(rows)
+                data_tuples = [tuple(d.values()) for d in rows]
+                return entity.Entity.ListUsers(data_tuples)
             else:
                 return None
         except Exception as ex:
@@ -159,7 +171,8 @@ class Model:
                 "select * from language_type lt inner join language_programming lp on lt.id_langtype = lp.language_type inner join language_learned ll on ll.language_programming = lp.id_language inner join knowledge_level kl on kl.id_knowledge_level = ll.knowledge_level;")
             rows = cursor.fetchall()
             if rows:
-                return entity.Entity.languageLearnedList(rows)
+                data_tuples = [tuple(d.values()) for d in rows]
+                return entity.Entity.languageLearnedList(data_tuples)
             else:
                 return None
         except Exception as ex:
@@ -174,7 +187,8 @@ class Model:
                 "select * from language_type lt inner join language_programming lp on lt.id_langtype = lp.language_type inner join language_learned ll on ll.language_programming = lp.id_language inner join knowledge_level kl on kl.id_knowledge_level = ll.knowledge_level where ll.user_language = {0} order by lt.id_langtype asc;".format(username))
             row = cursor.fetchall()
             if row:
-                return entity.Entity.languageLearnedList(row)
+                data_tuples = [tuple(d.values()) for d in row]
+                return entity.Entity.languageLearnedList(data_tuples)
             else:
                 return None
         except Exception as ex:
@@ -189,7 +203,9 @@ class Model:
                 "select*from education e where e.id_education = {0};".format(id))
             row = cursor.fetchone()
             if row:
-                return entity.Entity.educationEntity(row)
+                row = [row]
+                data_tuples = [tuple(d.values()) for d in row]
+                return entity.Entity.educationEntity(data_tuples[0])
             else:
                 return None
         except Exception as ex:
@@ -204,7 +220,8 @@ class Model:
                 "select*from education e where e.user_education = {0} order by e.id_education asc;".format(username))
             row = cursor.fetchall()
             if row:
-                return entity.Entity.educationList(row)
+                data_tuples = [tuple(d.values()) for d in row]
+                return entity.Entity.educationList(data_tuples)
             else:
                 return None
         except Exception as ex:
@@ -273,7 +290,9 @@ class Model:
                 "select * from language_type lt inner join language_programming lp on lt.id_langtype = lp.language_type inner join language_learned ll on ll.language_programming = lp.id_language inner join knowledge_level kl on kl.id_knowledge_level = ll.knowledge_level where ll.id_langlearn = {0};".format(id))
             row = cursor.fetchone()
             if row:
-                return entity.Entity.languageLearnedEntity(row)
+                row = [row]
+                data_tuples = [tuple(d.values()) for d in row]
+                return entity.Entity.languageLearnedEntity(data_tuples[0])
             else:
                 return None
         except Exception as ex:
@@ -288,7 +307,9 @@ class Model:
                 "select * from language_type lt inner join language_programming lp on lt.id_langtype = lp.language_type inner join language_learned ll on ll.language_programming = lp.id_language inner join knowledge_level kl on kl.id_knowledge_level = ll.knowledge_level where ll.language_programming = {0} and ll.user_language = {1};".format(language, user))
             row = cursor.fetchone()
             if row:
-                return entity.Entity.languageLearnedEntity(row)
+                row = [row]
+                data_tuples = [tuple(d.values()) for d in row]
+                return entity.Entity.languageLearnedEntity(data_tuples[0])
             else:
                 return None
         except Exception as ex:
@@ -306,11 +327,12 @@ class Model:
                 with connection.cursor() as cursor:
                     cursor.execute("insert into language_learned (description, knowledge_level, language_programming, user_language) values('{0}', {1}, {2}, {3});".format(
                         data['description'], data['knowledge_level'], data['language_programming'], data['user_language']))
-                    id = cursor.execute("SELECT @@IDENTITY AS 'Identity'").fetchone()[0]
-                    rows_affects = cursor.rowcount
+                    cursor.execute("SELECT @@IDENTITY AS 'Identity'")
+                    id = cursor.fetchone()['Identity']
                     connection.commit()
-                    if rows_affects > 0:
+                    if id!=0:
                         user = self.get_languagebyid(id)
+                        print(user)
                         return user
                     else:
                         return None
@@ -346,7 +368,9 @@ class Model:
                 "select * from gender g inner join person p on p.gender = g.id_gender inner join users u on u.person = p.id_person inner join rol_user ru on ru.id_rol = u.rol_user where u.user_name = '{0}' and u.user_delete = 0;".format(username))
             row = cursor.fetchone()
             if row:
-                return entity.Entity.entityUser(row)
+                row = [row]
+                data_tuples = [tuple(d.values()) for d in row]
+                return entity.Entity.entityUser(data_tuples[0])
             else:
                 return None
         except Exception as ex:
@@ -361,7 +385,9 @@ class Model:
                 "select * from gender g inner join person p on p.gender = g.id_gender inner join users u on u.person = p.id_person inner join rol_user ru on ru.id_rol = u.rol_user where u.email = '{0}' and u.user_delete = 0;".format(email))
             row = cursor.fetchone()
             if row:
-                return entity.Entity.entityUser(row)
+                row = [row]                
+                data_tuples = [tuple(d.values()) for d in row]
+                return entity.Entity.entityUser(data_tuples[0])
             else:
                 return None
         except Exception as ex:
@@ -376,23 +402,26 @@ class Model:
                 "select * from gender g inner join person p on p.gender = g.id_gender inner join users u on u.person = p.id_person inner join rol_user ru on ru.id_rol = u.rol_user where u.id_user = '{0}' and u.user_delete = 0;".format(id))
             row = cursor.fetchone()
             if row:
-                return entity.Entity.entityUser(row)
+                row = [row]
+                data_tuples = [tuple(d.values()) for d in row]
+                return entity.Entity.entityUser(data_tuples[0])
             else:
                 return None
         except Exception as ex:
             raise Exception(ex)
 
     @classmethod
-    def login_user(self, data):
+    def login_user(self, id_user, password):
         try:
             user = self.get_userbyemail(
-                data['id_user']) or self.get_userbyusername(data['id_user'])
+                id_user) or self.get_userbyusername(id_user)
+            print(user)
             if user:
-                if check_password_hash(user.get('user')['password'], data['password']) and user.get('user')['user_state']:
+                if check_password_hash(user.get('user')['password'], password) and user.get('user')['user_state'] == 0:
                     return user
-                elif check_password_hash(user.get('user')['password'], data['password']) is False:
+                elif check_password_hash(user.get('user')['password'], password) is False:
                     return 2
-                elif user.get('user')['user_state'] is False:
+                elif user.get('user')['user_state'] == 1:
                     return 1
             else:
                 return -1
@@ -439,7 +468,9 @@ class Model:
                     fecha = "{0}/{1}/{2}".format(f.month, f.day, f.year)
                     cursor.execute("insert into person(card_id_person, first_name, last_name, phone, address, gender, date_born) values('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}');".format(
                         data['card_id_person'], data['first_name'], data['last_name'], data['phone'], data['address'], data['gender'], data['date_born']))
-                    id_person = cursor.execute("SELECT @@IDENTITY AS 'Identity'").fetchone()[0]
+                    cursor.execute("SELECT @@IDENTITY AS 'Identity'")
+                    id_person = cursor.fetchone()['Identity']
+                    print(id_person)
                     iduser = ''
                     if int(data['id_rol']) == 1:
                         iduser = 'PRE-' + data['card_id_person']

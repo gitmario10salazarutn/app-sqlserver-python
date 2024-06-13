@@ -52,7 +52,7 @@ create table users(
     constraint fk_person_user foreign key(person) references person(id_person)
 );
 
-insert into users(user_name, email, password, login_code, user_state, register_date, person) values('ADM-1003938410', 'elenitarueda@gmail.com', 'password-elenita', '0000', '1', '2023-04-06', 1);
+insert into users(user_name, email, password, login_code, user_state, register_date, person, rol_user, user_delete) values('ADM-1003938410', 'elenitarueda@gmail.com', 'password-elenita', '0000', '1', '2023-04-06', 1, 1, 0);
 
 select*from users;
 
