@@ -139,8 +139,37 @@ $ py .\api\app.py
       <span style="font-weight: bold">Linux</span>
     </div>
 
+1. Clone the repository
+
+```bash
+$ git clone https://github.com/gitmario10salazarutn/app-sqlserver-python.git
 ```
-$ add installations steps if you have to.
+
+2.  Open project with Visual Studio Code
+
+```bash
+$ cd app-sqlserver-python
+$ code .
+```
+
+3. Create the virtual enviroment and activate
+
+```bash
+$ sudo apt install python-virtualenv
+$ virtualenv name_env
+$ source .\name_env\bin\activate
+```
+
+4. Install the requirements.txt file
+
+```bash
+$ pip install -r requirements.txt
+```
+
+5. 🏃 Run API or Start Server
+
+```
+$ python3 .\api\app.py
 ```
 
 ### 📦 Commands
@@ -171,23 +200,30 @@ Add a file structure here with the basic details about files, below is an exampl
 
 ```
 .
-├── assets
-│   ├── css
-│   │   ├── index-ui.css
-│   │   └── rate-ui.css
-│   ├── images
-│   │   ├── icons
-│   │   │   ├── shrink-button.png
-│   │   │   └── umbrella.png
-│   │   ├── logo_144.png
-│   │   └── Untitled-1.psd
-│   └── javascript
-│       ├── index.js
-│       └── rate.js
-├── CNAME
-├── index.html
-├── rate.html
+├── api
+│   ├── database
+│   │   ├── connectdb.py
+│   │   └── db.sql
+│   ├── models
+│   │   ├── entities
+│   │   │   └── entities.py
+│   │   └── models.py
+│   |── static
+|   |   |── css
+|   |   |   └── style.css
+|   |   |── img
+|   |   |   └── night-moon.png
+│   │   └── swagger.json
+│   |── templates
+│   |   ├── index.html
+|   └── app.py
+├── .env
+├── .gitignore
+├── Dockerfile
+├── requirements.txt
+├── vercel.json
 └── README.md
+
 ```
 
 | No  | File Name | Details    |

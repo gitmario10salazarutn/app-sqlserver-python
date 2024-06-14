@@ -17,6 +17,10 @@ import sys
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 from models.models import Model as Model
+from models import models
+
+user = models.Model.get_userbyid(1)
+print(user)
 
 app = Flask(__name__)
 CORS(app)
