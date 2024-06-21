@@ -8,6 +8,10 @@ create table gender(
 insert into gender(gender_name) values('Male');
 insert into gender(gender_name) values('Female');
 
+
+select*from gender;
+
+
 create table person(
     id_person integer identity not null,
     card_id_person varchar(13) not null unique,
@@ -21,9 +25,14 @@ create table person(
     constraint fk_gender_person foreign key(gender) references gender(id_gender) 
 );
 
-insert into person(card_id_person, first_name, last_name, phone, address, gender, date_born) values('1003938410', 'Mario', 'Salazar', '0979432426', 'Ibarra - El Tejar', 1, '1995-02-02');
 
-insert into person(card_id_person, first_name, last_name, phone, address, gender, date_born) values('1003938477', 'Elenita', 'Rueda', '0979432410', 'Ibarra - San Francisco del Tejar', 1, '1995-12-02');
+insert into person(card_id_person, first_name, last_name, phone, address, gender, date_born) 
+values('1003938410', 'Mario', 'Salazar', '0979432426', 'Ibarra - El Tejar', 1, '1995-02-02');
+
+insert into person(card_id_person, first_name, last_name, phone, address, gender, date_born) 
+values('1003938477', 'Lizbeth', 'Robles', '0979432410', 'Quito - Simon Bolivar', 1, '2005-12-02');
+
+
 
 create table rol_user(
     id_rol integer identity not null,
@@ -37,7 +46,11 @@ insert into rol_user(rol_name) values('Rol user Manager');
 insert into rol_user(rol_name) values('Rol user Employed');
 insert into rol_user(rol_name) values('Rol user Secretary');
 
+
+
 select*from rol_user;
+
+
 
 create table users(
     id_user integer identity not null,
@@ -52,15 +65,19 @@ create table users(
     constraint fk_person_user foreign key(person) references person(id_person)
 );
 
-insert into users(user_name, email, password, login_code, user_state, register_date, person, rol_user, user_delete) values('ADM-1003938410', 'elenitarueda@gmail.com', 'password-elenita', '0000', '1', '2023-04-06', 1, 1, 0);
+
+alter table users add rol_user integer;
+alter table users 
+add constraint fk_rol_users foreign key(rol_user) references rol_user(id_rol);
+
+alter table users add user_delete integer not null;
 
 select*from users;
 
-alter table users add rol_user integer;
-update users set rol_user = 1 where id_user = 1;
+insert into users(user_name, email, password, login_code, user_state, register_date, person, rol_user, user_delete) 
+values('ADM-1003938410', 'mariosalazar.ms.10@gmail.com', 'password-mario', '0000', '1', '2023-04-06', 1, 1, 0);
 
-alter table users 
-add constraint fk_rol_users foreign key(rol_user) references rol_user(id_rol);
+
 
 /*
 
