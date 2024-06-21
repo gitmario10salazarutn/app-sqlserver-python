@@ -5,18 +5,11 @@ Created on Fri Mar  3 15:54:16 2023
 @author: Mario
 """
 
-#comment
-
 from .entities import entities as entity
 from database import connectdb as conn
 from werkzeug.security import generate_password_hash, check_password_hash
 import datetime
 import json
-
-cadena = "Mario"
-number = 12;
-float = 12.58;
-char = 'a';
 
 
 class Model:
@@ -242,8 +235,7 @@ class Model:
                 cursor.execute("insert into education (institution, major, year_start, year_end, description, user_education) values ('{0}', '{1}', {2}, {3}, '{4}', {5});".format(
                     data['institution'], data['major'], data['year_start'], data['year_end'], data['description'], data['user_education']))
                 rows_affects = cursor.rowcount
-                cursor.execute("SELECT @@IDENTITY AS 'Identity'")
-                id = cursor.fetchone()['Identity']
+                id = cursor.execute("SELECT @@IDENTITY AS 'Identity'").fetchone()[0]
                 connection.commit()
                 if rows_affects > 0:
                     e = self.get_educationbyid(id)
