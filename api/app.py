@@ -19,7 +19,7 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 
 app = Flask(__name__)
-CORS(app)
+# CORS(app)
 # CORS(app, resources={r"/users/*": {"origins": "*"}})
 CORS(app, resources={r"/users/*": {"origins": "*", "methods": [
      "GET", "POST", "PUT", "DELETE"], "allow_headers": ["Content-Type"]}})
@@ -80,6 +80,14 @@ def index():
 
 @app.route('/swagger/docs')
 def swagger():
+    domain = request.host_url+"users"
+    json_file_path = os.path.join(app.static_folder, 'swagger.json')
+    with open(json_file_path, 'r', encoding='utf-8') as file:
+        data = json.load(file)
+        (data['servers'][0])['url'] = ""+domain
+        print((data['servers'][0])['url'])
+    with open(json_file_path, 'w', encoding='utf-8') as file:
+        json.dump(data, file, indent=4, ensure_ascii=False)
     return render_template('swagger.html', title="My API")
 
 

@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "title": "Swagger API SQL SERVER and Python - OpenAPI 3.0",
+    "title": "Swagger API SQL Server and Python - OpenAPI 3.0",
     "description": "Test",
     "termsOfService": "http://swagger.io/terms/",
     "contact": {
@@ -19,10 +19,10 @@
   },
   "servers": [
     {
-      "url": "https://app-postgresql-python.vercel.app/users"
+      "url": "http://127.0.0.1:5000/users"
     },
     {
-      "url": "http://localhost:5000/users"
+      "url": "https://app-sqlserver-python-two.vercel.app/users"
     }
   ],
   "tags": [
