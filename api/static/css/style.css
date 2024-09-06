@@ -139,10 +139,27 @@ button:hover {
 
 .d-flex {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   padding: 10px;
   margin-top: 10px;
+  border-radius: 5px;
+  background: -webkit-linear-gradient(
+    90deg,
+    #2b192d,
+    #223334,
+    #11270b,
+    #1e2029,
+    #452664
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    90deg,
+    #623c67,
+    #001b1c,
+    #202d1c,
+    #20212b,
+    #452664
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 .btn-login {
