@@ -232,10 +232,13 @@ class Model:
         try:
             connection = conn.get_connection()
             with connection.cursor() as cursor:
-                cursor.execute("insert into education (institution, major, year_start, year_end, description, user_education) values ('{0}', '{1}', {2}, {3}, '{4}', {5});".format(
-                    data['institution'], data['major'], data['year_start'], data['year_end'], data['description'], data['user_education']))
+                query = "insert into education (institution, major, year_start, year_end, description, user_education) values ('{0}', '{1}', {2}, {3}, '{4}', {5});".format(
+                    data['institution'], data['major'], data['year_start'], data['year_end'], data['description'], data['user_education'])
+                print(query)
+                cursor.execute(query)
                 rows_affects = cursor.rowcount
-                id = cursor.execute("SELECT @@IDENTITY AS 'Identity'").fetchone()[0]
+                cursor.execute("SELECT @@IDENTITY AS 'Identity'")
+                id = cursor.fetchone()['Identity']
                 connection.commit()
                 if rows_affects > 0:
                     e = self.get_educationbyid(id)

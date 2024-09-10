@@ -245,6 +245,7 @@ def create_education():
     try:
         data = request.json
         education = model.Model.create_education(data)
+        print(data)
         if education is None:
             return jsonify({'message': 'Insert education failed!', 'token': None}), 404
         else:
